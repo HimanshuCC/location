@@ -126,13 +126,18 @@ const Location: React.FC<NativeStackScreenProps<any, "Location Manager">> = (
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.header}>Location Manager</Text>
-      <Text style={styles.subheader}>Current Location</Text>
-      <SafeAreaView style={styles.avatar}>
+      <Text testID="list-current-label" style={styles.subheader}>
+        Current Location
+      </Text>
+      <SafeAreaView testID="list-current-item" style={styles.avatar}>
         {context.locations.length ? (
           <>
-            <UserAvatar size={25} name="Himanshu Sharma"></UserAvatar>
+            <SafeAreaView testID="list-current-icon">
+              <UserAvatar size={25} name="Himanshu Sharma"></UserAvatar>
+            </SafeAreaView>
             <SafeAreaView style={styles.flexView}>
               <Text
+                testID="list-current-name"
                 style={{
                   ...styles.marginleft,
                   ...styles.subheader,
@@ -141,7 +146,7 @@ const Location: React.FC<NativeStackScreenProps<any, "Location Manager">> = (
               >
                 {context.locations[context.locations.length - 1]?.locationName!}
               </Text>
-              <Text style={{ marginLeft: 10 }}>
+              <Text testID="list-current-time" style={{ marginLeft: 10 }}>
                 {formatDate(
                   context.locations[context.locations.length - 1]?.timeAndDate!
                 )}
@@ -165,10 +170,16 @@ const Location: React.FC<NativeStackScreenProps<any, "Location Manager">> = (
                 }
               >
                 <SafeAreaView>
-                  <Text style={styles.headerText}>
+                  <Text
+                    testID={`list-previous-name-${item.index}`}
+                    style={styles.headerText}
+                  >
                     {item.item?.locationName!}
                   </Text>
-                  <Text style={styles.subheader}>
+                  <Text
+                    testID={`list-previous-time-${item.index}`}
+                    style={styles.subheader}
+                  >
                     {formatDate(item.item.timeAndDate)}
                   </Text>
                 </SafeAreaView>
@@ -177,6 +188,7 @@ const Location: React.FC<NativeStackScreenProps<any, "Location Manager">> = (
                 <Button
                   title="Remove"
                   color="grey"
+                  testID={`List-previous-remove-${item.index}`}
                   onPress={() => {
                     clearInterval(intervalHandler);
                     context.removeLocation(item.index);
@@ -192,6 +204,7 @@ const Location: React.FC<NativeStackScreenProps<any, "Location Manager">> = (
         <Button
           disabled={context.locations.length < 1}
           title="Clear All"
+          testID="list-clear-all-button"
           onPress={() => {
             context.clearLocation();
             clearInterval(intervalHandler);

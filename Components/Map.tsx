@@ -16,11 +16,12 @@ const Map: React.FC<NativeStackScreenProps<RootStackParamList, "Map">> = (
 ) => {
   return (
     <MapView
+      testID="Map View"
       provider="google"
       style={styles.map}
       initialRegion={{
-        latitude: 31.776685,
-        longitude: 35.234491,
+        latitude: props.route.params.latitude,
+        longitude: props.route.params.longitude,
         latitudeDelta: 0.04,
         longitudeDelta: 0.05,
       }}
