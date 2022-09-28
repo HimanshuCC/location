@@ -155,7 +155,7 @@ const Location: React.FC<NativeStackScreenProps<any, "Location Manager">> = (
           </>
         ) : null}
       </SafeAreaView>
-      <Text>Previous Location</Text>
+      <Text testID="list-previous-label">Previous Location</Text>
       <FlatList
         data={context.locations}
         renderItem={(item) => {
